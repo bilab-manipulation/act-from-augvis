@@ -1,3 +1,13 @@
+# ACT from augmented data
+## Installation
+```
+conda create -n act_from_augvis python=3.11
+conda activate act_from_augvis
+pip install -r requirements.txt
+cd detr/ && pip install -e .
+
+```
+
 # ACT: Action Chunking with Transformers
 
 ### *New*: [ACT tuning tips](https://docs.google.com/document/d/1FVIZfoALXg_ZkYKaYVh-qOlaXveq5CtvJHXkY25eYhs/edit?usp=sharing)
