@@ -3,6 +3,7 @@ import torch
 import os
 import h5py
 from torch.utils.data import TensorDataset, DataLoader
+import cv2
 
 import IPython
 e = IPython.embed
@@ -38,6 +39,7 @@ class EpisodicDataset(torch.utils.data.Dataset):
             qvel = root['/observations/qvel'][start_ts]
             image_dict = dict()
             for cam_name in self.camera_names:
+                #print(start_ts, dataset_path, cam_name, len(root[f'/observations/images/{cam_name}']), len(root[f'/observations/images/cam_left_wrist']), len(root[f'/observations/images/cam_right_wrist']))
                 image_dict[cam_name] = root[f'/observations/images/{cam_name}'][start_ts]
             # get all actions after and including start_ts
             if is_sim:
@@ -53,6 +55,11 @@ class EpisodicDataset(torch.utils.data.Dataset):
         is_pad = np.zeros(episode_len)
         is_pad[action_len:] = 1
 
+        # deal with data collected from act-plus-plus
+        for cam_name in image_dict.keys():
+            decompressed_image = cv2.imdecode(image_dict[cam_name], 1)
+            image_dict[cam_name] = np.array(decompressed_image)
+                
         # new axis for different cameras
         all_cam_images = []
         for cam_name in self.camera_names:

@@ -1,4 +1,7 @@
-# ACT from augmented data
+# ACT for augmented vision
+Kisung Shin
+virtualkss@snu.ac.kr
+
 ## Installation
 ```
 conda create -n act_from_augvis python=3.11
@@ -7,6 +10,30 @@ pip install -r requirements.txt
 cd detr/ && pip install -e .
 
 ```
+## preprocessing
+```
+# cp origin data -> aligin data
+python align_data.py
+python indexing_data.py
+
+# check
+# find . -type f | wc -l
+# du -hs folder
+```
+
+## training
+```
+python3 imitate_episodes.py --task_name bag --ckpt_dir ckpt_bag --policy_class ACT --kl_weight 10 --chunk_size 50 --hidden_dim 512 --batch_size 8 --dim_feedforward 3200 --num_epochs 10000  --lr 1e-5 --seed 0
+
+python3 imitate_episodes.py --task_name towel --ckpt_dir ckpt_towel --policy_class ACT --kl_weight 10 --chunk_size 50 --hidden_dim 512 --batch_size 8 --dim_feedforward 3200 --num_epochs 10000  --lr 1e-5 --seed 0
+
+python3 imitate_episodes.py --task_name bag_aligned_augmented --ckpt_dir ckpt_bag_aligned_augmented --policy_class ACT --kl_weight 10 --chunk_size 50 --hidden_dim 512 --batch_size 8 --dim_feedforward 3200 --num_epochs 10000  --lr 1e-5 --seed 0
+
+python3 imitate_episodes.py --task_name towel_aligned_augmented --ckpt_dir ckpt_towel_aligned_augmented --policy_class ACT --kl_weight 10 --chunk_size 50 --hidden_dim 512 --batch_size 8 --dim_feedforward 3200 --num_epochs 10000  --lr 1e-5 --seed 0
+
+```
+
+
 
 # ACT: Action Chunking with Transformers
 

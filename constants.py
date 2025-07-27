@@ -1,7 +1,7 @@
 import pathlib
 
 ### Task parameters
-DATA_DIR = '<put your data dir here>'
+DATA_DIR = '../data'
 SIM_TASK_CONFIGS = {
     'sim_transfer_cube_scripted':{
         'dataset_dir': DATA_DIR + '/sim_transfer_cube_scripted',
@@ -31,6 +31,34 @@ SIM_TASK_CONFIGS = {
         'camera_names': ['top']
     },
 }
+TASK_CONFIGS = {
+    'bag':{
+        'dataset_dir': DATA_DIR + '/bag/',
+        'num_episodes': 50,
+        'episode_len': 1000,
+        'camera_names': ['cam_high', 'cam_left_wrist', 'cam_right_wrist']
+    },
+    'bag_aligned_augmented':{
+        'dataset_dir': DATA_DIR + '/bag_augmented/aligned_episodes/',
+        'num_episodes': 1050,
+        'episode_len': 1000,
+        'camera_names': ['cam_high', 'cam_left_wrist', 'cam_right_wrist']
+    },
+    
+    'towel':{
+        'dataset_dir': DATA_DIR + '/towel/',
+        'num_episodes': 50,
+        'episode_len': 1000,
+        'camera_names': ['cam_high', 'cam_left_wrist', 'cam_right_wrist']
+    },
+    'towel_aligned_augmented':{
+        'dataset_dir': DATA_DIR + '/towel_augmented/aligned_episodes/',
+        'num_episodes': 1050,
+        'episode_len': 1000,
+        'camera_names': ['cam_high', 'cam_left_wrist', 'cam_right_wrist']
+    },
+}
+
 
 ### Simulation envs fixed constants
 DT = 0.02
